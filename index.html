@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SeaHawk</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-storage.js"></script>
+
+        <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="Main/assets/css/style.css" rel="stylesheet">
+
+</head>
+<body  class="hold-transition sidebar-mini layout-fixed dark-mode" data-panel-auto-height-mode="height">
+
+  <div  class="hold-transition login-page" id="loginHolder" style="background-color: black;">
+    <div  class="login-box" style="box-shadow: 0 4px 8px 0 rgba(231, 8, 8, 0.89), 0 6px 20px 0 rgba(252, 251, 251, 0.945);">
+    <!-- /.login-logo -->
+    <div  class="card card-outline card-primary" style="background-color: rgba(0, 0, 0, 0.322); ">
+      <div class="card-header text-center">
+        <a  href="#" class="h1"><b>Sea</b>Hawk</a>
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+  
+        <form action="../../index3.html" method="post">
+          <div class="input-group mb-3">
+            <input id="loginEmail"  type="email" class="form-control" placeholder="Email">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input id="loginPassword"  type="password" class="form-control" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div style="float: right;" class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <!-- <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div> -->
+            <!-- /.col -->
+          </div>
+        </form>
+  
+        <div onclick="loginUser()" style="margin-top: 30px;" class="social-auth-links text-center mt-2 mb-3">
+          <a href="#" class="btn btn-block btn-primary">
+            <!-- <i class="fab fa-facebook mr-2"></i>  -->
+            <span id="spanLogin"> <b>Log In</b></span> <i id="loader" style="height: 20px; display: none;" class="fa fa-spinner fa-spin "></i>
+          </a>
+          <!-- <a href="#" class="btn btn-block btn-danger">
+            <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+          </a> -->
+        </div>
+        <!-- /.social-auth-links -->
+  
+        <!-- <p class="mb-1">
+          <a href="forgot-password.html">I forgot my password</a>
+        </p> -->
+        <p class="mb-0" >
+          <a  href="register.html" class="text-center" style="float: right; font-size: 10px; color: white;">NageMax 3.0.0</a>
+        </p>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+   </div>
+  </div>
+
+ 
+<div id="blank"  class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark" style="background-color: black;">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+
+         <!-- Messages Dropdown Menu -->
+         <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="Main/doc.html">
+            <i title="System Documentation"  class="fa fa-book"></i>
+            <!-- <span class="badge badge-danger navbar-badge">0</span> -->
+          </a>
+          <!-- <div style="height: 30px;" class="dropdown-menu dropdown-menu-lg dropdown-menu-right"> <a href="gs://mizizi-africa-homes.appspot.com/nagemaxDocumentation/NAGEMAX DOCUMENTATION.pdf">
+            <span class="dropdown-item dropdown-header">ystem Documentation</span></a>
+          </div> -->
+        </li>
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge">0</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <span class="dropdown-item dropdown-header">0 Notifications</span>
+            <!-- <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-envelope mr-2"></i> 4 new messages
+              <span class="float-right text-muted text-sm">3 mins</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-users mr-2"></i> 8 friend requests
+              <span class="float-right text-muted text-sm">12 hours</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item">
+              <i class="fas fa-file mr-2"></i> 3 new reports
+              <span class="float-right text-muted text-sm">2 days</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a> -->
+          </div>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li style="display: none;" class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: black;">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <img src="dist/img/logosingle-removebg-preview1.png" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span style="margin-left: 20px; align-items: center; " class="brand-text "><b style="font-size: 35px; text-shadow: 5px 5px 7px rgb(100, 1, 5);">SeaHawk</b> <sup style="vertical-align: super; font-size: smaller;">GEN</sup> </span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
+        </div>
+      </div> -->
+
+      <!-- SidebarSearch Form -->
+      <div style="margin-top: 20px;" class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+               <!-- <li class="nav-header">HOME</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+               <i class="nav-icon fas fa-tachometer-alt"></i> 
+              <i class="nav-icon fa fa-globe" aria-hidden="true"></i>
+              <p>
+                Dashboard
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Main Dashboard</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li> -->
+          <li class="nav-header"><b>PROJECTS</b> </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i style="color: rgb(19, 179, 247);" class="fa fa-cogs nav-icon" aria-hidden="true"></i>
+              <p>
+                Projects
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a id="projectsLink" href="Main/inner-page.html" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);"class="far fa-star nav-icon"></i>
+                  <p>My Projects</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);"class="fa fa-plus nav-icon" aria-hidden="true"></i>
+                  <p>New Project</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="Main/occurence.html" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);"class="nav-icon fas fa-book"></i>
+                  <p>Occurrence Book</p>
+                </a>
+              </li>
+              <!-- <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-plus nav-icon" aria-hidden="true"></i>
+                  <i class="fa fa-pencil-square-o nav-icon" aria-hidden="true"></i>
+                
+                  <p>Edit Project</p>
+                  
+                </a>
+              </li> -->
+            </ul>
+          </li>
+          
+          
+          <li class="nav-header"><b>STORE MANAGEMENT</b> </li>
+      
+          
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i style="color: rgb(247, 144, 19);" class="nav-icon far fa-envelope"></i>
+              <p>
+                Supply
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Main/newsupplyholder.html" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);"class="fa fa-plus nav-icon" aria-hidden="true"></i>
+                  <p>New Supply</p>
+                </a>
+              </li>
+           
+              <li class="nav-item">
+                <a href="Main/mysups.html" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);" class="fa fa-object-group nav-icon" aria-hidden="true"></i>
+                  <p>My Suppliers</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i style="color: rgb(247, 144, 19);"class="nav-icon fas fa-book"></i>
+              <p>
+                Usages
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);" class="fa fa-plus nav-icon"></i>
+                  <p>New Usage</p>
+                </a>
+              </li>
+            
+              
+            </ul>
+          </li>
+          <li style="margin-bottom: 30px;" class="nav-item">
+            <a href="#" class="nav-link">
+              <i style="color: rgb(247, 144, 19);"class="nav-icon far fa-plus-square"></i>
+              <p>
+                Out of Stock
+              </p>
+            </a>
+          
+          </li>
+        
+          
+          
+          <li class="nav-header"><b>STAFF MANAGEMENT</b> </li>
+        
+          
+          <li style="display: none;" class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fa fa-user nav-icon"></i>
+              <p>
+               Office Staff 
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-trash nav-icon"></i>
+                  <p>
+                    Delete
+                    
+                  </p>
+                </a>
+               
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-pencil-square nav-icon"></i>
+                  <p>Update</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i style="color: rgb(202, 7, 127);" class="fa fa-users nav-icon" ></i>
+              <p>
+               Site Staff 
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Main/addUser.html" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);" class="fa fa-plus nav-icon" aria-hidden="true"></i>
+                  <p>Register staff</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);" class="fa fa-trash nav-icon"></i>
+                  <p>
+                    Delete
+                    <!-- <i class="right fas fa-angle-left"></i> -->
+                  </p>
+                </a>
+               
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);" class="fa fa-circle nav-icon" aria-hidden="true"></i>
+                  <p>Update</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-header"><b>AUTOMOBILE</b> </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i style="color: rgb(134, 80, 252);" class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Vehicle Management
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Main/motor.html" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);" class="fa fa-bus nav-icon"></i>
+                  <p>My Vehicles</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <li  class="nav-header"><b>ACCOUNT</b> </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i style="color: rgb(6, 150, 175);" class="fa fa-calendar nav-icon" aria-hidden="true"></i>
+              <p>
+               Bills
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li  class="nav-item">
+                <a href="Main/newBill.html" class="nav-link">
+                  <i style="color: rgb(26, 157, 3);" class="fa fa-plus nav-icon" aria-hidden="true"></i>
+                  <!-- <i class="far fa-plus nav-icon"></i> incidence response safety- technical -->
+                  <p>New Bill</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i style="color: rgb(6, 150, 175);" class="fa fa-user nav-icon" aria-hidden="true"></i>
+              <p>
+                My Account
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li onclick="logOutUser()" class="nav-item">
+                <a href="#" class="nav-link">
+                  <i style="color: rgb(156, 5, 5);" class="fa fa-power-off nav-icon"></i>
+                  <p>Logout</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          
+        
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper iframe-mode bg-dark" data-widget="iframe" data-auto-dark-mode="true" data-loading-screen="750" style="background-color: black;">
+    <div class="nav navbar navbar-expand-lg navbar-dark border-bottom border-dark p-0"style="background-color: black;">
+      <a class="nav-link bg-danger" href="#" data-widget="iframe-close">Close</a>
+      <a class="nav-link bg-dark" href="#" data-widget="iframe-scrollleft"><i class="fas fa-angle-double-left" ></i></a>
+      <ul class="navbar-nav" role="tablist">
+      </ul>
+      <a class="nav-link bg-dark" href="#" data-widget="iframe-scrollright"><i class="fas fa-angle-double-right"></i></a>
+      <a class="nav-link bg-dark" href="#" data-widget="iframe-fullscreen"><i class="fas fa-expand"></i></a>
+    </div>
+    <div class="tab-content" style="background-color: black;">
+      <div class="tab-empty">
+        <iframe src="Main/inner-page.html" frameborder="0"></iframe>
+      </div>
+      <div class="tab-loading">
+        <div>
+          <h2 class="display-4">Loading.. <i class="fa fa-sync fa-spin"></i></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" style="background-color: rgb(29, 31, 30);">
+      <strong>Copyright &copy; 2023 <a href="#">FelishTech.solutions</a>.</strong>
+      All rights reserved. <a href="https://www.freepik.com/search">Icons by wanicon</a>
+      <div class="float-right d-none d-sm-inline-block">
+        NageMax 3.0.0
+      </div>
+    </footer>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<script src="database.js"></script>
+
+<script>
+ 
+
+  function loginUser(){
+
+      var inputEmail = getInputValue("loginEmail")
+      var password = getInputValue("loginPassword").toString()
+
+      if(inputEmail !==""&&password !==""){
+
+        var email = inputEmail.replace(".com","")
+
+        if(document.getElementById("spanLogin").innerHTML ==="Loading "){
+          
+        }
+        else{
+          document.getElementById("loader") .style.display = "block"
+          document.getElementById("spanLogin").innerHTML ="Loading "
+        
+          var database = firebase.database().ref(parentDatabase).child("Admins").child(email).once("value",
+                function(Snapshot){
+                  if(Snapshot.exists()){
+
+                    var storedPIN = Snapshot.val().password.toString();
+                    
+                  
+                      if(storedPIN === password){
+                        document.getElementById("blank").style.display = "block"
+                        document.getElementById("loginHolder").style.display = "none"
+                        document.getElementById("loader").style.display = "none"
+                        document.getElementById("spanLogin").innerHTML ="Log In"
+                        document.getElementById("loginEmail").value =""
+                        document.getElementById("loginPassword").value =""
+                        document.getElementById("projectsLink").click()
+                       
+                      }
+                      else{
+                        alert("Wrong email or password")
+                        document.getElementById("loader").style.display = "none"
+                        document.getElementById("spanLogin").innerHTML ="Log In"
+                      }
+                    
+                  }
+                  else{
+                    alert("Wrong email or password")
+                    document.getElementById("loader").style.display = "none"
+                    document.getElementById("spanLogin").innerHTML ="Log In"
+                  }
+                });
+
+           }
+          
+        }
+        else{
+          alert("Please enter both email and password")
+        }
+
+     
+  }
+function getInputValue(id){
+return document.getElementById(id).value;
+
+}
+function logOutUser(){
+
+  if (confirm("Are you sure you want to logout?")) {
+      
+        document.getElementById("blank").style.display = "none"
+        document.getElementById("loginHolder").style.display = "flex"
+    } else {
+     
+      
+    }
+  
+
+}
+
+</script>
+
+</body>
+</html>
